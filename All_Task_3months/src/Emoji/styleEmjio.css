@@ -1,0 +1,81 @@
+.box{
+    width: 290px;
+    height: 545px;
+    border: 2px solid #d5dbe0;
+    margin: auto;
+    margin-top: 30px;
+    border-radius: 20px;
+    background-color: #c697f3;
+}
+.inputbox {
+  margin-top: 200px;
+  display: flex;
+  flex-direction: row;
+ 
+  
+}
+
+.inpuxstyle {
+  width: 400px; /* Adjust the width as needed */
+  height: 30px;
+  margin-top: 30px;
+  background-color: #ffb9f2;
+  border: 1px none;
+  border-radius: 5px;
+  outline-color: #c697f3;
+  color: aliceblue;
+  font-weight: bold;
+  text-decoration: none;
+  text-underline-offset: none;
+  align-items: center;
+  vertical-align: middle;
+}
+
+/* Add the following style to make the button inline with the input */
+button {
+  height: 55px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: 1px solid #4CAF50;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+/* Adjust this margin as needed */
+}
+
+/* Style for the smile icon inside the input box */
+
+
+.Picker {
+    margin-bottom: 400px;
+   width: 287px !important;
+   height: 300px !important;
+  background-color: #ffb9f2 !important;
+
+}
+.ReactionBar{
+  width: 287px !important;
+ margin-left: 190px !important;
+ background-color: #c697f3 !important;
+}
+/* Add this CSS to your styleEmjio.css file */
+
+/* Styles for the message container */
+
+
+
+.message-box {
+  border: 1px solid white;
+  width: fit-content;
+  color: white;
+  margin-top: 50px;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  align-items: center; 
+}
+.selected-emoji {
+  margin-left: 190px;
+  margin-bottom: 20px;
+}
+
+

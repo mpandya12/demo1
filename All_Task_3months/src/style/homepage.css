@@ -1,0 +1,40 @@
+
+
+.containers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
+  }
+  
+  .class-1s {
+    margin: 10px;
+  }
+  
+  .button-links {
+    padding: 10px 20px;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-links:hover {
+    background-color: #2980b9;
+  }
+  
+  .links {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  /* Adjustments for mobile responsiveness */
+  @media (max-width: 600px) {
+    .containers {
+      justify-content: flex-start;
+    }
+  }
+  

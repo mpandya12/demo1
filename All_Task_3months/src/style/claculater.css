@@ -1,0 +1,90 @@
+.back{
+    width: 50px;
+    height: 100%;
+}
+.box-2{
+    border: solid black 3px;
+    height: 550px;
+    width: 400px;
+    margin-left: 400px;
+    margin-top: 20px;
+    background-color: #d1e3ed;
+    border-radius: 10px;
+}
+.box-3{
+    padding: 10px;
+   
+}
+
+.label-1{
+  padding: 2px;
+  width: 20vw;
+  margin-left: 120px;
+}
+.label-2{
+    padding: 2px;
+    width: 20vw;
+    margin-left: 50px;
+  }
+
+.label-3{
+    padding: 2px;
+    width: 20vw;
+    margin-left: 160px;
+  }
+
+  .button-group{
+    display: flex;
+    padding: 17px;
+  }
+  .button-group button {
+    margin-left: 45px;
+  }
+
+.label-4{
+    padding: 2px;
+    width: 20vw;
+    margin-left: 60px;
+    margin-top: 10px;
+  }
+  .label-5{
+    padding: 2px;
+    width: 20vw;
+    margin-left: 20px;
+    margin-bottom: 50px;
+    margin-top: 20px;
+  }
+  .label-6{
+    padding: 2px;
+    width: 20vw;
+    margin-left: 50px;
+    background-color: azure;
+  }
+  .label-7{
+    padding: 2px;
+    width: 20vw;
+    margin-left: 40px;
+  }
+  .label-8{
+    border: 1px solid black;
+    width: 300px;
+    height: 100px;
+    overflow: auto;
+   
+  }
+  .h1{
+    margin-left: 90px;
+    font-weight: 100;
+    font-size: medium;
+  }
+  #text1{
+align-items: center;
+text-align: center;
+  }
+
+  .error-box{
+    color: red;
+    text-shadow: #d1e3ed;
+    margin-left: 120px;
+    margin-top: 10px;
+  }

@@ -1,0 +1,39 @@
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { updateImage, updateuser } from "./Slice";
+function FeatchUpdateData(){
+    
+    return async function FeatchUpdateData(dispatch,state){
+    
+   const dispatch=useDispatch()
+        try {
+            dispatch(updateuser({ ...data }));
+      
+            const formData = new FormData();
+            formData.append(" profile_img", selectedImage);
+            formData.append("name", data.name);
+            formData.append("email", data.email);
+            console.log(formData);
+      
+            const headers = {
+              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3BlYmFwaS5za2F2aXNiaW90ZWMuY29tL2FwaS9sb2dpbiIsImlhdCI6MTcwMDgxOTEwNiwiZXhwIjoxNzMyMzU1MTA2LCJuYmYiOjE3MDA4MTkxMDYsImp0aSI6Im5KMm9qZW1RVkdHNFBxbkIiLCJzdWIiOiIzMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.v3GOy2dvPIRqC6QZ1g-ZyIqz5rHKm5xlv3HYXdsVJsg`,
+              Accept: "application/json",
+              "content-type": "multipart/form-data",
+            };
+      
+            const response = await axios.post(
+              "https://pebapi.skavisbiotec.com/api/update-profile",
+              formData,
+              { headers }
+            );
+      
+            dispatch(updateImage(selectedImage));
+           
+            console.log(response.data);
+          } catch (error) {
+            console.error("Error updating profile:", error);
+          }
+    }
+}
+
+export default FeatchUpdateData;

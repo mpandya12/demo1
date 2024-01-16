@@ -1,0 +1,29 @@
+/* Word_wrappe.css */
+
+.box1 {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .box1 p {
+    display: inline; /* Display the paragraph content inline */
+    margin: 0; /* Remove default paragraph margin */
+  }
+  
+  .box2,
+  .box3 {
+    color: blue;
+    cursor: pointer;
+  }
+  
+  .box3 {
+    color: red;
+  }
+  
+  .box2:hover,
+  .box3:hover {
+    text-decoration: underline;
+  }
+
+  

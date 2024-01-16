@@ -1,0 +1,142 @@
+/* Add these styles to your App.css file */
+
+/* Modal Styles */
+.modal-content {
+  border-radius: 10px;
+}
+
+.modal-header {
+  background-color: whitesmoke;
+  color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.modal-footer {
+  border-top: 1px solid #ddd;
+}
+
+/* Characters Container Styles */
+.characters {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+/* Draggable Item Styles */
+.characters div {
+  display: flex;
+ 
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  /* border: 1px solid #ddd; */
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #fff;
+  cursor: grab;
+}
+
+.characters div:hover {
+  /* background-color: #f0f0f0; */
+}
+
+.characters div:active {
+  cursor: grabbing;
+}
+
+.characters div span {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Delete Icon Styles */
+.delete {
+  cursor: pointer;
+  color: #dc3545;
+  transition: color 0.3s ease;
+}
+
+.delete:hover {
+  color: #bd2130;
+}
+
+/* Add Post Styles */
+.main-div {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.main-div input {
+  flex: 1;
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.main-div button {
+  padding: 8px 12px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+.main-div button:hover {
+  background-color: #218838;
+}
+
+/* Circle Plus Icon Styles */
+.icon-add {
+  font-size: 24px;
+  color: #28a745;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.icon-add.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.icon-add:hover {
+  color: #218838;
+}
+
+/* Save Button Styles */
+.btn-save {
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-save:hover {
+  background-color: #0056b3;
+}
+
+.popup a {
+  display: inline-block;
+  padding: 2px 2px;
+  margin-right: 8px; /* Adjust the margin to add space between buttons */
+  text-decoration: none;
+  color: #fff;
+  /* background-color: #007bff; */
+  /* border: 1px solid #007bff; */
+  border-radius: 4px;
+}
+
+.post-list{
+  display: flex;
+  flex-direction: row;
+}

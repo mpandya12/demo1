@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+#more {display: none;}
+</style>
+</head>
+<body>
+
+<h2>Read More Read Less Button</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas vitae scel<span id="dots">...</span><span id="more">erisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta.</span></p>
+<button onclick="myFunction()" id="myBtn">Read more</button>
+
+<script>
+function myFunction() {
+  var dots = document.getElementById("dots");
+  var moreText = document.getElementById("more");
+  var btnText = document.getElementById("myBtn");
+
+  if (dots.style.display === "none") {
+    dots.style.display = "inline";
+    btnText.innerHTML = "Read more"; 
+    moreText.style.display = "none";
+  } else {
+    dots.style.display = "none";
+    btnText.innerHTML = "Read less"; 
+    moreText.style.display = "inline";
+  }
+}
+</script>
+
+</body>
+</html>
+import React, { useEffect, useRef, useState } from "react";
+import { Modal, Button, Col } from "react-bootstrap";
+import { AiFillDelete } from "react-icons/ai";
+import { BiEditAlt } from "react-icons/bi";
+import "../../style/CurdFrom.css";
+import { BsArrowDown, BsArrowDownUp } from "react-icons/bs";
+import Addfrom from "./Addfrom";
+import Autosuggest from "react-autosuggest";
+import { RxCross2 } from "react-icons/rx";
+import { AiOutlineDash } from "react-icons/ai";
+import { BsArrowUp } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  DeleteFrom,
+  UpdateFrom,
+  importdata,
+  searchEmployees,
+} from "../ReduxToolkit/Curdslice";
+
+function Curd() {
+  const { data } = useSelector((state) => state.AddFrom);
+  const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
+  const colums = [
+    "id",
+    "name",
+    "username",
+    "gender",
+    "dob",
+    "state",
+    "city",
+    "email",
+    "actions",
+  ];
+  const [formData, setFormData] = useState({});
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [open, setopen] = useState(false);
+  const iconRef = useRef(null);
+  const [rows, setrows] = useState(data);
+  const [cols, setcols] = useState(colums);
+  const [Dragover, setDragover] = useState("");
+  const [sortedcolumn, setsortedcolumn] = useState("name");
+  const [sortorder, setsortorder] = useState("asc");
+  const[selecteRow,setselectRow]=useState([])
+  const[selectAll,setSelectAll]=useState(false)
+  const handleSearch = (event, { newValue }) => {
+    setSearchQuery(newValue);
+    console.log(event);
+  };
+
+  const DisplaySuggestiondata = ({ value }) => {
+    dispatch(searchEmployees(value));
+  };
+
+  const getSuggestions = () => {
+    return data
+      .filter((emp) => {
+        const empData = `${emp.name} ${emp.username} ${emp.email} ${emp.Address}`;
+        return empData.toLowerCase().includes(searchQuery.toLowerCase());
+      })
+      .map((emp) => emp.username);
+  };
+
+  useEffect(() => {
+    setrows(data);
+  }, [data]);
+
+  const renderSuggestion = (suggestion) => {
+    return <div>{suggestion}</div>;
+  };
+
+  const inputProps = {
+    placeholder: "Search employees...",
+    value: searchQuery,
+    onChange: handleSearch,
+  };
+
+  const openModal = (isEditing, data, index) => {
+    setIsEditing(isEditing);
+    setFormData(data);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const handleShowDeleteModal = (id) => {
+    setShowDeleteModal(true);
+    dispatch(DeleteFrom(id));
+  };
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+  };
+
+  const handelclearsuggestions = () => {
+    setSearchQuery("");
+  };
+
+  function download_csv_file() {
+    var csv = "name,  username,,gender,dob, state, city, Address,email,\n";
+    data.forEach(function (row) {
+      csv += Object.values(row).join(",");
+      csv += "\n";
+    });
+
+    // document.write(csv);
+
+    var hiddenElement = document.createElement("a");
+    hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csv);
+    hiddenElement.target = "_blank";
+    hiddenElement.download = "EmployeeList.csv";
+    hiddenElement.click();
+  }
+
+  function CSVToArray(csvText) {
+    const lines = csvText.split("\n");
+    const result = [];
+    for (let i = 1; i < lines.length; i++) {
+      const values = lines[i].split(",");
+      if (values.length === 9) {
+        const [
+          name,
+          username,
+          gender,
+          dob,
+          state,
+          city,
+          Address,
+          email,
+          lanaguage,
+        ] = values;
+        result.push({
+          name,
+          username,
+          gender,
+          dob,
+          state,
+          city,
+          Address,
+          email,
+          lanaguage,
+        });
+      }
+    }
+    return result;
+  }
+  //The contains() method in JavaScript is used to check if a particular element is a descendant of another specified element. In the context of handling click events and checking if the click occurred outside a specific element, contains() is often used to determine if the clicked element is a descendant of the target element.
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (iconRef.current && !iconRef.current.contains(event.target)) {
+        console.log(!iconRef.current.contains(event.target));
+        if (iconRef.current) {
+          console.log("change icon");
+          setopen(false);
+          setopen(open);
+        } else {
+          console.log("error");
+        }
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [iconRef]);
+
+  //useClickOutside(colsedropdown)
+
+  const handleImportCSV = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".csv";
+    input.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const csvData = event.target.result;
+          const parsedData = CSVToArray(csvData);
+          dispatch(importdata(parsedData));
+        };
+        reader.readAsText(file);
+      }
+    };
+    input.click();
+  };
+
+  //drage cloums in table
+  const handelDragStart = (e) => {
+    const { id } = e.target;
+    console.log(id);
+    const inof = cols.indexOf(id);
+    console.log(inof);
+    e.dataTransfer.setData("colid", inof);
+    // console.log( e.dataTransfer.setData("colid",inof));
+  };
+  const handleDragover = (e) => {
+    e.preventDefault();
+  };
+
+  const handelDragEnter = (e) => {
+    const { id } = e.target;
+
+    setDragover(id);
+  };
+  const handeldrop = (e) => {
+    const { id } = e.target;
+    const dropid = cols.indexOf(id);
+    console.log(dropid);
+    //  const dropid=dragid.dataTransfer(id)
+    const dragid = e.dataTransfer.getData("colid");
+    console.log(dragid);
+    const tempcol = [...cols];
+    tempcol[dragid] = cols[dropid];
+    tempcol[dropid] = cols[dragid];
+    setcols(tempcol);
+    setDragover("");
+    console.log(tempcol);
+
+    //console.log(dropid);
+    //in tempcol  store drang and drop ids and in state store this tempary cols
+  };
+  console.log(sortedcolumn);
+  console.log(sortorder);
+
+  const toggleSortingOrder = (col) => {
+    const newSortOrder =
+      col === sortedcolumn && sortorder === "asc" ? "desc" : "asc";
+    setsortedcolumn(col);
+    console.log(col);
+    setsortorder(newSortOrder);
+    console.log(newSortOrder);
+
+    const sorted = [...data].sort((a, b) =>
+      newSortOrder === "asc"
+        ? a[col].toLowerCase()  > b[col].toLowerCase()
+          ? 1
+          : -1
+        : a[col].toLowerCase() < b[col].toLowerCase()
+        ? 1
+        : -1
+    );
+
+    setrows(sorted);
+    console.log(sorted);
+  };
+
+  //select multipal row
+  
+
+const handleRowSelection = (rowId) => {
+  const isSelected = selecteRow.includes(rowId);
+  console.log(isSelected);
+  if (isSelected) {
+    setselectRow(selecteRow.filter(id => id !== rowId));
+  } else {
+    setselectRow([...selecteRow, rowId]);
+  }
+
+};
+const handleSelectAllChange = () => {
+  setSelectAll(selectAll);
+  
+  if (selectAll) {
+    setselectRow(rows.map((_, index) => index + 1));
+  } else {
+      setselectRow([]);
+   
+  }
+};
+
+
+
+ 
+
+  
+  return (
+    <>
+      <div className="table-title w-10" style={{ backgroundColor: "gray" }}>
+        <div className="row " style={{ background: "black" }}>
+          <div className="col-sm-7" style={{ marginTop: "20px" }}>
+            <h2 style={{ color: "white", marginRight: "340px" }}>
+              Manage <b>Employees</b>
+            </h2>
+          </div>
+
+          <div
+            className="col-sm-4 flexs"
+            style={{ display: "flex", alignItems: "center", marginTop: "20px" }}
+          >
+            <Button
+              onClick={() => openModal(false)}
+              className="btn btn-success"
+              style={{ width: "230px", marginTop: "5px", marginRight: "10px" }}
+            >
+              <span>Add </span>
+            </Button>
+            <Button
+              onClick={download_csv_file}
+              className="btn btn-warning"
+              style={{ width: "120px", marginTop: "5px", marginRight: "10px" }}
+            >
+              <span>Export</span>
+            </Button>
+            <Button
+              onClick={handleImportCSV}
+              className="btn btn-danger"
+              style={{ width: "100px", marginTop: "5px" }}
+            >
+              <span>Import</span>
+            </Button>
+          </div>
+        </div>
+      </div>
+      <div
+        className="input-1"
+        style={{ marginLeft: "40px", marginTop: "20px" }}
+      >
+        <Autosuggest
+          suggestions={getSuggestions()}
+          onSuggestionsFetchRequested={DisplaySuggestiondata}
+          onSuggestionsClearRequested={handelclearsuggestions}
+          getSuggestionValue={(suggestion) => suggestion}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputProps}
+        />
+      </div>
+
+      <div
+        className="container table-container"
+        style={{ marginLeft: "30px", marginTop: "10px" }}
+      >
+        <table className="table ">
+          <thead>
+            <tr>
+                <th>
+                  <input type="checkbox" checked={selectAll} onchange={handleSelectAllChange}  /> 
+                </th>
+              {cols.map((col, index) => (
+                <>
+
+                  <th
+                    key={col}
+                    id={col}
+                    draggable
+                    onDragStart={handelDragStart}
+                    onDragOver={handleDragover}
+                    onDragEnter={handelDragEnter}
+                    onDrop={handeldrop}
+                    dragover={cols === Dragover}
+                    className="drang"
+                    onClick={() => toggleSortingOrder(col)}
+                  >
+                
+                    {col}
+                    {col === "actions" || col === "id" ? (
+                      ""
+                    ) : (
+                      <>
+                       
+                        <button
+                          className="sorting-button "
+                          
+                        >
+                          {col === sortedcolumn ? (
+                            <>
+                              {sortorder === "asc" ? (
+                                <BsArrowUp className="up-icon" />
+                              ) : (
+                                <BsArrowDown className="down-icon" />
+                              )}
+                            </>
+                          ) : (
+                            ""
+                          )}
+                        </button>
+                      </>
+                    )}
+                  </th>
+                </>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((emp, colindex) => (
+              <tr key={colindex + 1}>
+                   <td>
+                <input
+                  type="checkbox"
+                  checked={selecteRow.includes(colindex + 1)}
+                  onChange={() => handleRowSelection(colindex + 1)}
+                />
+              </td>
+                {cols.map((column, index) => (
+                  <>
+                 
+                  <td key={index}>
+                    {column === "actions" ? (
+                      <div className="dropdown" ref={iconRef}>
+                        <h5
+                          onClick={() => {
+                            setopen(!open);
+                          }}
+                        >
+                          {open ? <AiOutlineDash /> : <RxCross2 />}
+                        </h5>
+
+                        {open && (
+                          <>
+                            <div className="dropdown-content">
+                              <span>
+                                <BiEditAlt
+                                  className="edit_icons"
+                                  style={{ width: "35px", height: "30px" }}
+                                  onClick={() => {
+                                    dispatch(UpdateFrom(emp, emp.id));
+                                    openModal(true);
+                                  }}
+                                />
+                                Edit
+                              </span>
+                              <span>
+                                <AiFillDelete
+                                  className="edit_icon"
+                                  style={{ width: "35px", height: "30px" }}
+                                  onClick={() => handleShowDeleteModal(emp.id)}
+                                />
+                                Delete
+                              </span>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    ) : (
+                      <>{column === "id" ? colindex + 1 : emp[column]}</>
+                    )}
+                  </td>
+                  </>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div></div>
+      <Addfrom
+        isEditing={isEditing}
+        formData={formData}
+        showModal={showModal}
+        closeModal={closeModal}
+        onSubmit={Addfrom}
+      />
+
+      <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Employee</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this employee?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDeleteModal}>
+            Close
+          </Button>
+          <Button variant="danger" onClick={handleShowDeleteModal}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}
+
+export default Curd;

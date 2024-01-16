@@ -1,0 +1,319 @@
+.form{
+    display: flex;
+    justify-content: center;
+}
+
+
+.tags-preview {
+    margin-top: 10px;
+    font-size: 16px;
+    color: whitesmoke;
+
+  }
+
+  td{
+    font-size: medium;
+    font-weight: 500;
+  }
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px; /* Adjust as needed */
+    margin-bottom: -1px;
+  }
+
+  /* Dropdown button */
+  .dropdown button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  /* Dropdown content (hidden by default) */
+  .dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  /* Style for each item in the dropdown list */
+  .dropdown .dropdown-content span {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+    width: 150px;
+  }
+  .dropdown .dropdown-content span .active{
+    display: inline;
+  }
+  .dropdown .dropdown-content span .active{
+    display: none;
+  }
+  /* Hover effect for dropdown items */
+  .dropdown .dropdown-content span:hover {
+    background-color: #3498db;
+    color: #fff;
+  }
+
+  /* Show the dropdown content when the dropdown button is clicked */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .drang:hover{
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    color: blueviolet
+  }
+
+
+  /* CSS for the icon */
+/* Add these styles to your CSS file */
+.sort-icon-up {
+  color: rgb(4, 255, 0); /* or your preferred color */
+}
+
+.sort-icon-down {
+  color: black; /* or your preferred color */
+}
+/* Add these styles to your existing CSS */
+
+.sorting-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.up-icon, .down-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.active {
+ display: none;
+}
+
+.icon-container {
+  visibility: hidden;
+ 
+}
+
+.icon-container.visible {
+  visibility: visible;
+}
+
+.column_box{
+  width: 400px;
+  height: 200px;
+  border: 2px solid black;
+  margin: auto;
+}
+.column_box {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd; /* Add any additional styling you want for the column box */
+  padding: 10px;
+  height: 200px;
+  overflow-y: scroll;
+  width: 200px;
+}
+
+.th1 {
+  
+  
+  
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 8px;
+  box-sizing: border-box;
+
+}
+
+
+
+/* Style for the Toggle component - adjust as needed */
+.toggle-container {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-label {
+  margin-right: 8px;
+}
+
+.toggle-switch {
+  /* Add styling for the toggle switch */
+  width: 40px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 10px;
+  position: relative;
+}
+
+.toggle-slider {
+  /* Add styling for the slider button */
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s ease;
+}
+
+/* Adjust the appearance of the slider when the toggle is on */
+.toggle-input:checked + .toggle-slider {
+  transform: translateX(20px);
+}
+/* Add these styles to your existing CSS */
+
+/* Flex container for table rows */
+tr {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap-reverse; /* Allow the content to wrap to the next line if it's too wide */
+}
+
+/* Flex container for table header cells */
+th {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-right: 10px; 
+  margin-left: 10px;
+}
+
+/* Flex container for table data cells */
+td {
+  display: flex;
+  
+
+  box-sizing: border-box; 
+  margin-left: 20px;
+ /* Ensure padding is included in width calculation */
+}
+
+/* Adjust the button style */
+.sorting-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 4px; /* Add any margin you want between the column name and the sorting button */
+}
+
+/* Style for the icon */
+.up-icon,
+.down-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 4px; /* Add any margin you want between the column name and the sorting icon */
+}
+
+/* Additional styling for other elements as needed */
+
+
+
+.thhide{
+  display: table-cell;
+}
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #3e8e41;
+}
+
+/* The search field */
+
+/* The search field when it gets focus/clicked on */
+#myInput:focus {outline: 3px solid #ddd;}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+
+.filter-modal{
+  width: 300px;
+  height: 140px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  border-radius: 20px;
+ 
+  margin-top: 10px;
+
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 70%;
+  border-top: 16px solid #3498db;
+  width: 60px;
+  height: 80px;
+  margin-left: 560px;
+  -webkit-animation: spin 2s linear infinite; 
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
